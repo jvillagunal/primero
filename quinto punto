@@ -1,0 +1,25 @@
+/*
+Dado el radio de un círculo. Haga un algoritmo que obtenga el área del círculo y la longitud
+de la circunferencia. 
+*/
+
+//codigo
+
+import java.util.Scanner;
+
+public class Ejercicio17 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Ingresa radio del circulo: ");
+        double radio = sc.nextDouble();
+
+        double area = Math.PI * Math.pow(radio, 2);
+        double longitudCircunferencia = 2 * Math.PI * radio;
+
+        System.out.println("Elarea del circulo es: " + area);
+        System.out.println("Lalongitud de la circunferencia es: " + longitudCircunferencia);
+    }
+}
+
+
