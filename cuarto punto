@@ -1,0 +1,27 @@
+/*
+Elabore un algoritmo que lea un número y obtenga su cuadrado y su cubo. 
+*/
+
+// codigo
+
+import java.util.Scanner;
+//mepregunte las funcionalidades del util.scaner y encontre este articulo interesante en https://www.educative.io/answers/what-in-javautilscanner-in-java
+public class Ejercicio14 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Ingresa el numero: ");
+        int numero = sc.nextInt();
+
+        int cuadrado = numero * numero;
+        int cubo = numero * numero * numero;
+
+        System.out.println("El cuadrado del numero ingresado es: " + cuadrado);
+        System.out.println("El cubo del numero ingresado es: " + cubo);
+    }
+}
+
+
+
+
+
