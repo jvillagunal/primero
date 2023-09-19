@@ -1,0 +1,123 @@
+Parte 2
+// Clase base para figuras geométricas
+public abstract class FiguraGeometrica {
+    public abstract double calcularArea();
+    public abstract double calcularPerimetro();
+}
+
+// Clase para el círculo
+public class Circulo extends FiguraGeometrica {
+    private double radio;
+
+    public Circulo(double radio) {
+        this.radio = radio;
+    }
+
+    @Override
+    public double calcularArea() {
+        return Math.PI * radio * radio;
+    }
+
+    @Override
+    public double calcularPerimetro() {
+        return 2 * Math.PI * radio;
+    }
+}
+
+// Clase para el rectángulo
+public class Rectangulo extends FiguraGeometrica {
+    private double base;
+    private double altura;
+
+    public Rectangulo(double base, double altura) {
+        this.base = base;
+        this.altura = altura;
+    }
+
+    @Override
+    public double calcularArea() {
+        return base * altura;
+    }
+
+    @Override
+    public double calcularPerimetro() {
+        return 2 * (base + altura);
+    }
+}
+
+// Clase para el cuadrado
+public class Cuadrado extends FiguraGeometrica {
+    private double lado;
+
+    public Cuadrado(double lado) {
+        this.lado = lado;
+    }
+
+    @Override
+    public double calcularArea() {
+        return lado * lado;
+    }
+
+    @Override
+    public double calcularPerimetro() {
+        return 4 * lado;
+    }
+}
+
+// Clase para el triángulo rectángulo
+public class TrianguloRectangulo extends FiguraGeometrica {
+    private double base;
+    private double altura;
+
+    public TrianguloRectangulo(double base, double altura) {
+        this.base = base;
+        this.altura = altura;
+    }
+
+    @Override
+    public double calcularArea() {
+        return (base * altura) / 2;
+    }
+
+    @Override
+    public double calcularPerimetro() {
+        // No se puede calcular el perímetro de un triángulo rectángulo solo con base y altura.
+        return -1;
+    }
+
+    public double calcularHipotenusa() {
+        return Math.sqrt(base * base + altura * altura);
+    }
+
+    public String determinarTipoTriangulo() {
+        if (base == altura) {
+            return "Equilátero";
+        } else if (base == altura || base == calcularHipotenusa() || altura == calcularHipotenusa()) {
+            return "Isósceles";
+        } else {
+            return "Escaleno";
+        }
+    }
+}
+//clase de prueba con el método main:
+public class PruebaFigurasGeometricas {
+    public static void main(String[] args) {
+        Circulo circulo = new Circulo(5);
+        Rectangulo rectangulo = new Rectangulo(6, 4);
+        Cuadrado cuadrado = new Cuadrado(4);
+        TrianguloRectangulo triangulo = new TrianguloRectangulo(3, 4);
+
+        System.out.println("Área del círculo: " + circulo.calcularArea());
+        System.out.println("Perímetro del círculo: " + circulo.calcularPerimetro());
+
+        System.out.println("Área del rectángulo: " + rectangulo.calcularArea());
+        System.out.println("Perímetro del rectángulo: " + rectangulo.calcularPerimetro());
+
+        System.out.println("Área del cuadrado: " + cuadrado.calcularArea());
+        System.out.println("Perímetro del cuadrado: " + cuadrado.calcularPerimetro());
+
+        System.out.println("Área del triángulo rectángulo: " + triangulo.calcularArea());
+        System.out.println("Hipotenusa del triángulo rectángulo: " + triangulo.calcularHipotenusa());
+        System.out.println("Tipo de triángulo rectángulo: " + triangulo.determinarTipoTriangulo());
+    }
+}
