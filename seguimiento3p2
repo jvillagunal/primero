@@ -1,0 +1,85 @@
+•	Ejercicio propuesto 19
+Dado el valor del lado en un triángulo equilátero, haga un algoritmo que obtenga el perímetro, el valor de la altura y el área del triángulo.
+//código
+public class TrianguloEquilatero {
+    private double lado;
+
+    public TrianguloEquilatero(double lado) {
+        this.lado = lado;
+    }
+
+    public double getLado() {
+        return lado;
+    }
+
+    public double calcularPerimetro() {
+        return 3 * lado;
+    }
+
+    public double calcularAltura() {
+        return (Math.sqrt(3) / 2) * lado;
+    }
+
+    public double calcularArea() {
+        return (Math.sqrt(3) / 4) * lado * lado;
+    }
+}
+
+
+//interfaz gráfica:
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class CalculadoraTriangulo {
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Calculadora de Triángulo Equilátero");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 200);
+
+        JPanel panel = new JPanel(new GridLayout(4, 2));
+
+        JLabel ladoLabel = new JLabel("Valor del lado del triángulo:");
+        JTextField ladoField = new JTextField();
+        JButton calcularButton = new JButton("Calcular Propiedades");
+
+        JLabel perimetroLabel = new JLabel("Perímetro:");
+        JLabel alturaLabel = new JLabel("Altura:");
+        JLabel areaLabel = new JLabel("Área:");
+
+        JTextField perimetroField = new JTextField();
+        JTextField alturaField = new JTextField();
+        JTextField areaField = new JTextField();
+
+        perimetroField.setEditable(false);
+        alturaField.setEditable(false);
+        areaField.setEditable(false);
+
+        panel.add(ladoLabel);
+        panel.add(ladoField);
+        panel.add(perimetroLabel);
+        panel.add(perimetroField);
+        panel.add(alturaLabel);
+        panel.add(alturaField);
+        panel.add(areaLabel);
+        panel.add(areaField);
+        panel.add(calcularButton);
+
+        calcularButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double lado = Double.parseDouble(ladoField.getText());
+                TrianguloEquilatero triangulo = new TrianguloEquilatero(lado);
+
+                perimetroField.setText(String.valueOf(triangulo.calcularPerimetro()));
+                alturaField.setText(String.valueOf(triangulo.calcularAltura()));
+                areaField.setText(String.valueOf(triangulo.calcularArea()));
+            }
+        });
+
+        frame.add(panel);
+        frame.setVisible(true);
+    }
+}
