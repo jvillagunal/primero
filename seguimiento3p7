@@ -1,0 +1,55 @@
+Ejercicio propuesto 22
+Elaborar un algoritmo que entre el nombre de un empleado, su salario básico por hora y el número de horas trabajadas en el mes; escriba su nombre y salario mensual si éste es mayor de $450.000, de lo contrario escriba sólo el nombre.
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class CalculadoraSalario {
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Calculadora de Salario");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 150);
+
+        JPanel panel = new JPanel();
+        frame.add(panel);
+
+        JLabel nameLabel = new JLabel("Nombre:");
+        JTextField nameField = new JTextField(20);
+        JLabel hoursLabel = new JLabel("Horas trabajadas:");
+        JTextField hoursField = new JTextField(5);
+        JLabel rateLabel = new JLabel("Salario por hora:");
+        JTextField rateField = new JTextField(5);
+        JButton calculateButton = new JButton("Calcular Salario");
+
+        panel.add(nameLabel);
+        panel.add(nameField);
+        panel.add(hoursLabel);
+        panel.add(hoursField);
+        panel.add(rateLabel);
+        panel.add(rateField);
+        panel.add(calculateButton);
+
+        JLabel resultLabel = new JLabel();
+
+        panel.add(resultLabel);
+
+        calculateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String name = nameField.getText();
+                double hours = Double.parseDouble(hoursField.getText());
+                double rate = Double.parseDouble(rateField.getText());
+                double salary = hours * rate;
+                if (salary > 450000) {
+                    resultLabel.setText("Nombre: " + name + ", Salario mensual: $" + salary);
+                } else {
+                    resultLabel.setText("Nombre: " + name);
+                }
+            }
+        });
+
+        frame.setVisible(true);
+    }
+}
