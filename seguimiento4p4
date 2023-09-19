@@ -1,0 +1,77 @@
+• Ejercicio resuelto 10
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Programa10 implements ActionListener {
+    private JFrame frame;
+    private JLabel labelInscripcion, labelNombres, labelPatrimonio, labelEstrato, labelResultado;
+    private JTextField textFieldInscripcion, textFieldNombres, textFieldPatrimonio, textFieldEstrato;
+    private JButton buttonCalcular;
+
+    public Programa10() {
+        frame = new JFrame("Calculadora de Matricula");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new GridLayout(6, 2));
+
+        labelInscripcion = new JLabel("Numero de inscripcion:");
+        textFieldInscripcion = new JTextField();
+        labelNombres = new JLabel("Nombres:");
+        textFieldNombres = new JTextField();
+        labelPatrimonio = new JLabel("Patrimonio:");
+        textFieldPatrimonio = new JTextField();
+        labelEstrato = new JLabel("Estrato social:");
+        textFieldEstrato = new JTextField();
+        buttonCalcular = new JButton("Calcular");
+        labelResultado = new JLabel();
+
+        buttonCalcular.addActionListener(this);
+
+        frame.add(labelInscripcion);
+        frame.add(textFieldInscripcion);
+        frame.add(labelNombres);
+        frame.add(textFieldNombres);
+        frame.add(labelPatrimonio);
+        frame.add(textFieldPatrimonio);
+        frame.add(labelEstrato);
+        frame.add(textFieldEstrato);
+        frame.add(buttonCalcular);
+        frame.add(labelResultado);
+
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == buttonCalcular) {
+            try {
+                int inscripcion = Integer.parseInt(textFieldInscripcion.getText());
+                String nombres = textFieldNombres.getText();
+                double patrimonio = Double.parseDouble(textFieldPatrimonio.getText());
+                int estrato = Integer.parseInt(textFieldEstrato.getText());
+
+                double pagoMatricula = 50000;
+
+                if (patrimonio > 2000000 && estrato > 3) {
+                    pagoMatricula = pagoMatricula + (0.03 * patrimonio);
+                }
+
+                labelResultado.setText("El estudiante con numero de inscripcion " + inscripcion +
+                        " y nombre " + nombres + " debe pagar: $" + pagoMatricula);
+            } catch (NumberFormatException ex) {
+                labelResultado.setText("Error! Por favor, ingrese datos validos.");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        new Programa10();
+    }
+}
+//main
+public class Main {
+    public static void main(String[] args) {
+        Programa10 Programa10 = new Programa10();
+    }
+}
