@@ -1,0 +1,74 @@
+Capítulo 4: Estructura decisión lógica 
+• Ejercicio resuelto 7
+Hacer un algoritmo que, dados dos valores numéricos A y B, escriba un mensaje diciendo si A es mayor, menor o igual a B.
+//código
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class programa7 implements ActionListener {
+    private JFrame frame;
+    private JLabel labelA, labelB, labelResultado;
+    private JTextField textFieldA, textFieldB;
+    private JButton buttonComparar;
+
+    public programa7() {
+        frame = new JFrame("Comparador de Numeros");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new GridLayout(4, 2));
+
+        labelA = new JLabel("Valor A:");
+        textFieldA = new JTextField();
+        labelB = new JLabel("Valor B:");
+        textFieldB = new JTextField();
+        buttonComparar = new JButton("Comparar");
+        labelResultado = new JLabel();
+
+        buttonComparar.addActionListener(this);
+
+        frame.add(labelA);
+        frame.add(textFieldA);
+        frame.add(labelB);
+        frame.add(textFieldB);
+        frame.add(buttonComparar);
+        frame.add(labelResultado);
+
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == buttonComparar) {
+            try {
+                int a = Integer.parseInt(textFieldA.getText());
+                int b = Integer.parseInt(textFieldB.getText());
+
+                String resultado;
+
+                if (a > b) {
+                    resultado = "A es mayor que B";
+                } else if (a == b) {
+                    resultado = "A es igual a B";
+                } else {
+                    resultado = "A es menor que B";
+                }
+
+                labelResultado.setText(resultado);
+            } catch (NumberFormatException ex) {
+                labelResultado.setText("Error! Por favor, ingrese valores numericos.");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        new programa7();
+    }
+}
+
+//Main:
+public class Main {
+    public static void main(String[] args) {
+        programa7 programa7 = new programa7();
+    }
+
