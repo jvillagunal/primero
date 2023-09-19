@@ -1,0 +1,99 @@
+Ejercicio propuesto 23
+Dados los valores A, B y C que son los parámetros de una ecuación de segundo grado, elaborar un algoritmo para hallar las posibles soluciones de dicha ecuación.
+public class EcuacionCuadratica {
+    private double a;
+    private double b;
+    private double c;
+
+    public EcuacionCuadratica(double a, double b, double c) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+
+    public double getA() {
+        return a;
+    }
+
+    public double getB() {
+        return b;
+    }
+
+    public double getC() {
+        return c;
+    }
+
+    public double calcularDiscriminante() {
+        return b * b - 4 * a * c;
+    }
+
+    public String calcularSoluciones() {
+        double discriminante = calcularDiscriminante();
+
+        if (discriminante > 0) {
+            double x1 = (-b + Math.sqrt(discriminante)) / (2 * a);
+            double x2 = (-b - Math.sqrt(discriminante)) / (2 * a);
+            return "Dos soluciones reales:\nX1 = " + x1 + "\nX2 = " + x2;
+        } else if (discriminante == 0) {
+            double x1 = -b / (2 * a);
+            return "Una solución real:\nX = " + x1;
+        } else {
+            return "No hay soluciones reales.";
+        }
+    }
+}
+
+
+//interfaz gráfica:
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class CalculadoraEcuacionCuadratica {
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Calculadora de Ecuación Cuadrática");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 200);
+
+        JPanel panel = new JPanel(new GridLayout(4, 2));
+
+        JLabel aLabel = new JLabel("Valor de A:");
+        JTextField aField = new JTextField();
+        JLabel bLabel = new JLabel("Valor de B:");
+        JTextField bField = new JTextField();
+        JLabel cLabel = new JLabel("Valor de C:");
+        JTextField cField = new JTextField();
+        JButton calcularButton = new JButton("Calcular Soluciones");
+
+        JTextArea solucionTextArea = new JTextArea();
+        solucionTextArea.setEditable(false);
+
+        panel.add(aLabel);
+        panel.add(aField);
+        panel.add(bLabel);
+        panel.add(bField);
+        panel.add(cLabel);
+        panel.add(cField);
+        panel.add(calcularButton);
+        panel.add(solucionTextArea);
+
+        calcularButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double a = Double.parseDouble(aField.getText());
+                double b = Double.parseDouble(bField.getText());
+                double c = Double.parseDouble(cField.getText());
+
+                EcuacionCuadratica ecuacion = new EcuacionCuadratica(a, b, c);
+                String soluciones = ecuacion.calcularSoluciones();
+
+                solucionTextArea.setText(soluciones);
+            }
+        });
+
+        frame.add(panel);
+        frame.setVisible(true);
+    }
+}
